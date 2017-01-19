@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset = "utf- 8" />
+	<title>Snake</title>
+	<style>
+	    * {padding: 0; margin: 0; }
+	    canvas { background: #eee; display: block; margin: 0 auto; }
+	</style>
+    </head>
+    <body>
+	<canvas id = "myCanvas" width = "500" height = "500" ></canvas>
+
+	<script>
+	 // Game Properties
+	 var canvas = document.getElementById("myCanvas");	 
+	 var ctx = canvas.getContext("2d");
+
+	 // Snake Properties
+	 var x = canvas.width/2;
+	 var y = canvas.height - 30;
+	 var snakeWidth = 10;
+	 var snakeHeight = 10;
+
+	 // Event handling
+	 document.addEventListener("keydown", keyDownHandler, false);
+	 document.addEventListener("keyup", keyUpHandler, false);
+
+	 function drawSnake() {
+	     ctx.beginPath();
+	     ctx.rect(x, y, snakeWidth, snakeHeight);
+	     ctx.fillStyle = "#00000";
+	     ctx.fill();
+	 }
+
+	 function draw() {
+	     ctx.clearRect(0, 0, canvas.width, canvas.height);
+	     drawSnake();
+	     ctx.closePath();
+	 }
+	 timer = setInterval(draw, 10);
+	</script>
+    </body>
+</html>
+	    
