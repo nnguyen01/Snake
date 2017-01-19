@@ -17,14 +17,19 @@
 	 var ctx = canvas.getContext("2d");
 
 	 // Snake Properties
-	 var x = canvas.width/2;
+	 var x = canvas.width/2; 
 	 var y = canvas.height - 30;
 	 var snakeWidth = 10;
 	 var snakeHeight = 10;
+	 var dx = snakeWidth;
+	 var dy = -snakeHeight;
 
-	 // Event handling
+	 // Event Handling
+	 var upPressed = true;
+	 var downPressed = false;
+	 var rightPressed = false;
+	 var leftPressed = false;
 	 document.addEventListener("keydown", keyDownHandler, false);
-	 document.addEventListener("keyup", keyUpHandler, false);
 
 	 function drawSnake() {
 	     ctx.beginPath();
@@ -33,12 +38,49 @@
 	     ctx.fill();
 	 }
 
+	 function keyDownHandler(e) {
+	     if (e.keyCode == 38 && !downPressed) {
+		 upPressed = true;
+		 downPressed = false;
+		 rightPressed = false;
+		 leftPressed = false;
+	     } else if (e.keyCode == 40 && !upPressed) {
+		 upPressed = false;
+		 downPressed = true;
+		 rightPressed = false;
+		 leftPressed = false;		 
+	     }
+	     if (e.keyCode == 39 && !leftPressed) {
+		 upPressed = false;
+		 downPressed = false;
+		 rightPressed = true;
+		 leftPressed = false;
+	     } else if (e.keyCode == 37 && !rightPressed) {
+		 upPressed = false;
+		 downPressed = false;
+		 rightPressed = false;
+		 leftPressed = true;		 
+	     }
+	 }
+	 
 	 function draw() {
 	     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	     drawSnake();
 	     ctx.closePath();
+
+	     if (upPressed) {
+		 y += dy;
+	     } else if (downPressed) {
+		 y -= dy;
+	     }
+	     if (rightPressed) {
+		 x += dx;
+	     } else if (leftPressed) {
+		 console.log("2");
+		 x -= dx;
+	     }
 	 }
-	 timer = setInterval(draw, 10);
+	 timer = setInterval(draw, 250);
 	</script>
     </body>
 </html>
